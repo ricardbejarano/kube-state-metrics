@@ -1,0 +1,27 @@
+FROM golang:alpine AS build
+
+ARG VERSION="1.7.1"
+ARG CHECKSUM="03650fbd73bd26b7e3542fd235e3445d8fe716e744f559457d916ab6817966fc"
+
+ADD https://github.com/kubernetes/kube-state-metrics/archive/v$VERSION.tar.gz /tmp/kube-state-metrics.tar.gz
+
+RUN [ "$CHECKSUM" = "$(sha256sum /tmp/kube-state-metrics.tar.gz | awk '{print $1}')" ] && \
+    tar -C /tmp -xf /tmp/kube-state-metrics.tar.gz && \
+    mv /tmp/kube-state-metrics-$VERSION /tmp/kube-state-metrics
+
+RUN apk add git && \
+    cd /tmp/kube-state-metrics && \
+      go install
+
+
+FROM scratch
+
+COPY --from=build /lib/ld-musl-x86_64.so.1 /lib/
+COPY --from=build /go/bin/kube-state-metrics /
+
+COPY rootfs /
+
+USER 100:100
+EXPOSE 8080/tcp 8081/tcp
+ENTRYPOINT ["/kube-state-metrics"]
+CMD ["--port=8080", "--telemetry-port=8081"]
