@@ -1,6 +1,6 @@
 <p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/198/chart-with-downwards-trend_1f4c9.png" width="120px"></p>
 <h1 align="center">kube-state-metrics (container image)</h1>
-<p align="center">Minimal container image of Kubernetes' <a href="https://github.com/kubernetes/kube-state-metrics">kube-state-metrics</a> server</p>
+<p align="center">Built-from-source container image of Kubernetes' <a href="https://github.com/kubernetes/kube-state-metrics">kube-state-metrics</a> server</p>
 
 
 ## Tags
