@@ -1,4 +1,4 @@
-FROM golang:alpine AS build
+FROM golang:1.12.7-alpine AS build
 
 ARG VERSION="1.7.1"
 ARG CHECKSUM="03650fbd73bd26b7e3542fd235e3445d8fe716e744f559457d916ab6817966fc"
@@ -11,15 +11,18 @@ RUN [ "$CHECKSUM" = "$(sha256sum /tmp/kube-state-metrics.tar.gz | awk '{print $1
 
 RUN apk add git && \
     cd /tmp/kube-state-metrics && \
-      go install
+      go install && \
+    echo "nogroup:*:100:nobody" > /tmp/group && \
+    echo "nobody:*:100:100:::" > /tmp/passwd
 
 
 FROM scratch
 
-COPY --from=build /lib/ld-musl-x86_64.so.1 /lib/
-COPY --from=build /go/bin/kube-state-metrics /
-
-COPY rootfs /
+COPY --from=build --chown=100:100 /go/bin/kube-state-metrics /
+COPY --from=build --chown=100:100 /lib/ld-musl-x86_64.so.1 /lib/
+COPY --from=build --chown=100:100 /tmp/group \
+                                  /tmp/passwd \
+                                  /etc/
 
 USER 100:100
 EXPOSE 8080/tcp 8081/tcp

@@ -1,6 +1,6 @@
-<p align=center><img src=https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/198/chart-with-downwards-trend_1f4c9.png width=120px></p>
-<h1 align=center>kube-state-metrics (container image)</h1>
-<p align=center>Minimal container image of Kubernetes' <a href=https://github.com/kubernetes/kube-state-metrics>kube-state-metrics</a> server</p>
+<p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/198/chart-with-downwards-trend_1f4c9.png" width="120px"></p>
+<h1 align="center">kube-state-metrics (container image)</h1>
+<p align="center">Minimal container image of Kubernetes' <a href="https://github.com/kubernetes/kube-state-metrics">kube-state-metrics</a> server</p>
 
 
 ## Tags
@@ -22,11 +22,11 @@ Available on [Quay](https://quay.io) as:
 
 ## Features
 
-* Super tiny (`glibc`-based is `~42.9MB` and `musl`-based is `~41.5MB`)
+* Super tiny (`glibc`-based image is about `42.9MB`, `musl`-based image is about `41.5MB`)
 * Compiled from source during build time
-* Binary pulled from official website
-* Built `FROM scratch`, see [Filesystem](#filesystem) for an exhaustive list of the image's contents
+* Built `FROM scratch`, with zero bloat (see [Filesystem](#filesystem))
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
+* Runs as unprivileged (non-`root`) user
 
 
 ## Building
