@@ -9,20 +9,20 @@
 
 Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/kube-state-metrics`](https://hub.docker.com/r/ricardbejarano/kube-state-metrics):
 
-- [`1.8.0-glibc`, `1.8.0`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.glibc)
-- [`1.8.0-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.musl)
+- [`1.8.0-glibc`, `1.8.0`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.glibc) (about `40.6MB`)
+- [`1.8.0-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.musl) (about `39.1MB`)
 
 ### Quay
 
 Available on [Quay](https://quay.io) as:
 
-- [`quay.io/ricardbejarano/kube-state-metrics-glibc`](https://quay.io/repository/ricardbejarano/kube-state-metrics-glibc), tags: [`1.8.0`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.glibc)
-- [`quay.io/ricardbejarano/kube-state-metrics-musl`](https://quay.io/repository/ricardbejarano/kube-state-metrics-musl), tags: [`1.8.0`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.musl)
+- [`quay.io/ricardbejarano/kube-state-metrics-glibc`](https://quay.io/repository/ricardbejarano/kube-state-metrics-glibc), tags: [`1.8.0`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.glibc) (about `40.6MB`)
+- [`quay.io/ricardbejarano/kube-state-metrics-musl`](https://quay.io/repository/ricardbejarano/kube-state-metrics-musl), tags: [`1.8.0`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.musl) (about `39.1MB`)
 
 
 ## Features
 
-* Super tiny (`glibc`-based image is about `42.9MB`, `musl`-based image is about `41.5MB`)
+* Super tiny (see [Tags](#tags))
 * Compiled from source during build time
 * Built `FROM scratch`, with zero bloat (see [Filesystem](#filesystem))
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
