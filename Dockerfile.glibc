@@ -7,24 +7,24 @@ ADD https://github.com/kubernetes/kube-state-metrics/archive/v$VERSION.tar.gz /t
 
 RUN [ "$CHECKSUM" = "$(sha256sum /tmp/kube-state-metrics.tar.gz | awk '{print $1}')" ] && \
     tar -C /tmp -xf /tmp/kube-state-metrics.tar.gz && \
-    mv /tmp/kube-state-metrics-$VERSION /tmp/kube-state-metrics
+    mv /tmp/kube-state-metrics-$VERSION /tmp/kube-state-metrics && \
+    cd /tmp/kube-state-metrics && \
+      go install
 
-RUN cd /tmp/kube-state-metrics && \
-      go install && \
-    echo "nogroup:*:100:nobody" > /tmp/group && \
-    echo "nobody:*:100:100:::" > /tmp/passwd
+RUN mkdir -p /rootfs/etc /rootfs/lib/x86_64-linux-gnu/ /rootfs/lib64/ && \
+    cp /go/bin/kube-state-metrics /rootfs/ && \
+    cp \
+      /lib/x86_64-linux-gnu/libc.so.6 \
+      /lib/x86_64-linux-gnu/libpthread.so.0 \
+      /rootfs/lib/x86_64-linux-gnu/ && \
+    cp /lib64/ld-linux-x86-64.so.2 /rootfs/lib64/ && \
+    echo "nogroup:*:100:nobody" > /rootfs/etc/group && \
+    echo "nobody:*:100:100:::" > /rootfs/etc/passwd
 
 
 FROM scratch
 
-COPY --from=build --chown=100:100 /go/bin/kube-state-metrics /
-COPY --from=build --chown=100:100 /lib/x86_64-linux-gnu/libc.so.6 \
-                                  /lib/x86_64-linux-gnu/libpthread.so.0 \
-                                  /lib/x86_64-linux-gnu/
-COPY --from=build --chown=100:100 /lib64/ld-linux-x86-64.so.2 /lib64/
-COPY --from=build --chown=100:100 /tmp/group \
-                                  /tmp/passwd \
-                                  /etc/
+COPY --from=build --chown=100:100 /rootfs /
 
 USER 100:100
 EXPOSE 8080/tcp 8081/tcp

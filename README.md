@@ -16,7 +16,7 @@ Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/kube-state
 
 Available on [Quay](https://quay.io) as:
 
-- [`quay.io/ricardbejarano/kube-state-metrics-glibc`](https://quay.io/repository/ricardbejarano/kube-state-metrics-glibc), tags: [`1.9.5`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.glibc) (about `40.6MB`)
+- [`quay.io/ricardbejarano/kube-state-metrics`](https://quay.io/repository/ricardbejarano/kube-state-metrics), [`quay.io/ricardbejarano/kube-state-metrics-glibc`](https://quay.io/repository/ricardbejarano/kube-state-metrics-glibc), tags: [`1.9.5`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.glibc) (about `40.6MB`)
 - [`quay.io/ricardbejarano/kube-state-metrics-musl`](https://quay.io/repository/ricardbejarano/kube-state-metrics-musl), tags: [`1.9.5`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/kube-state-metrics/blob/master/Dockerfile.musl) (about `39.1MB`)
 
 

@@ -7,22 +7,21 @@ ADD https://github.com/kubernetes/kube-state-metrics/archive/v$VERSION.tar.gz /t
 
 RUN [ "$CHECKSUM" = "$(sha256sum /tmp/kube-state-metrics.tar.gz | awk '{print $1}')" ] && \
     tar -C /tmp -xf /tmp/kube-state-metrics.tar.gz && \
-    mv /tmp/kube-state-metrics-$VERSION /tmp/kube-state-metrics
-
-RUN apk add git && \
+    apk add git && \
+    mv /tmp/kube-state-metrics-$VERSION /tmp/kube-state-metrics && \
     cd /tmp/kube-state-metrics && \
-      go install && \
-    echo "nogroup:*:100:nobody" > /tmp/group && \
-    echo "nobody:*:100:100:::" > /tmp/passwd
+      go install
+
+RUN mkdir -p /rootfs/etc /rootfs/lib && \
+    cp /go/bin/kube-state-metrics /rootfs/ && \
+    cp /lib/ld-musl-x86_64.so.1 /rootfs/lib/ && \
+    echo "nogroup:*:100:nobody" > /rootfs/etc/group && \
+    echo "nobody:*:100:100:::" > /rootfs/etc/passwd
 
 
 FROM scratch
 
-COPY --from=build --chown=100:100 /go/bin/kube-state-metrics /
-COPY --from=build --chown=100:100 /lib/ld-musl-x86_64.so.1 /lib/
-COPY --from=build --chown=100:100 /tmp/group \
-                                  /tmp/passwd \
-                                  /etc/
+COPY --from=build --chown=100:100 /rootfs /
 
 USER 100:100
 EXPOSE 8080/tcp 8081/tcp
