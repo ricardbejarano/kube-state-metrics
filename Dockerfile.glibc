@@ -11,7 +11,7 @@ RUN [ "$CHECKSUM" = "$(sha256sum /tmp/kube-state-metrics.tar.gz | awk '{print $1
     cd /tmp/kube-state-metrics && \
       go install
 
-RUN mkdir -p /rootfs/etc /rootfs/lib/x86_64-linux-gnu/ /rootfs/lib64/ && \
+RUN mkdir -p /rootfs/etc /rootfs/lib/x86_64-linux-gnu /rootfs/lib64 && \
     cp /go/bin/kube-state-metrics /rootfs/ && \
     cp \
       /lib/x86_64-linux-gnu/libc.so.6 \
