@@ -11,15 +11,13 @@ RUN [ "$(sha256sum /tmp/kube-state-metrics.tar.gz | awk '{print $1}')" = "$CHECK
     mkdir -p /go/src/github.com/kubernetes && \
     mv /tmp/kube-state-metrics-$VERSION /go/src/github.com/kubernetes/kube-state-metrics && \
     cd /go/src/github.com/kubernetes/kube-state-metrics && \
-      go install
+      CGO_ENABLED=0 go install
 
 RUN mkdir -p /rootfs/bin && \
       cp /go/bin/kube-state-metrics /rootfs/bin/ && \
     mkdir -p /rootfs/etc && \
       echo "nogroup:*:10000:nobody" > /rootfs/etc/group && \
-      echo "nobody:*:10000:10000:::" > /rootfs/etc/passwd && \
-    mkdir -p /rootfs/lib && \
-      cp /lib/ld-musl-x86_64.so.1 /rootfs/lib/
+      echo "nobody:*:10000:10000:::" > /rootfs/etc/passwd
 
 
 FROM scratch
