@@ -9,13 +9,13 @@
 
 Available on Docker Hub as [`docker.io/ricardbejarano/kube-state-metrics`](https://hub.docker.com/r/ricardbejarano/kube-state-metrics):
 
-- [`2.2.4`, `latest` *(Dockerfile)*](Dockerfile)
+- [`2.4.2`, `latest` *(Dockerfile)*](Dockerfile)
 
 ### RedHat Quay
 
 Available on RedHat Quay as [`quay.io/ricardbejarano/kube-state-metrics`](https://quay.io/repository/ricardbejarano/kube-state-metrics):
 
-- [`2.2.4`, `latest` *(Dockerfile)*](Dockerfile)
+- [`2.4.2`, `latest` *(Dockerfile)*](Dockerfile)
 
 
 ## Features
