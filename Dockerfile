@@ -1,7 +1,7 @@
 FROM golang:1-alpine AS build
 
-ARG VERSION="2.9.2"
-ARG CHECKSUM="208edc11cf2938a811c32333d96f560bb883e45cdc80bb1b1e51088a3047b6e2"
+ARG VERSION="2.10.0"
+ARG CHECKSUM="e410ae454945ab5e8c754ae6b93481c96521614d999efa1767af26b160dab82a"
 
 ADD https://github.com/kubernetes/kube-state-metrics/archive/v$VERSION.tar.gz /tmp/kube-state-metrics.tar.gz
 
